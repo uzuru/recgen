@@ -129,14 +129,16 @@ void createGrads() {
 }
 
 void gradMap(double d, unsigned char* imageData, int pos) {
-  for (int g=0; g<gcount; g++) {
+  for (int g=1; g<gcount; g++) {
 
     if ( gradients[g]->p > d ) {
 
-      int red = 1+gradients[g-1]->r * (1-d) + gradients[g]->r * d;
-      int gre = gradients[g-1]->g * (1-d) + gradients[g]->g * d;
-      int blu = gradients[g-1]->b * (1-d) + gradients[g]->b * d;
-      //printf("d=%f r=%d g=%d b=%d \n", d, red, gre, blu);
+      int red = (double) gradients[g-1]->r * (1.0-d) + (double) gradients[g]->r * d;
+      int gre = (double) gradients[g-1]->g * (1.0-d) + (double) gradients[g]->g * d;
+      int blu = (double) gradients[g-1]->b * (1.0-d) + (double) gradients[g]->b * d;
+
+       printf("d= %lf\n", gradients[g-1]->r * (1.0-d) + (double) gradients[g]->r * d);
+
       imageData[pos+0] = red;
       imageData[pos+1] = gre;
       imageData[pos+2] = blu;

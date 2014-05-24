@@ -5,8 +5,8 @@
 
 #include "gradient.c"
 
-const int width = 2000;
-const int height = 2000;
+const int width = 1004;
+const int height = 638;
 const int depthstartmax = 50000;
 const int depthstartmin = 1000;
 
@@ -175,7 +175,7 @@ int main(int argc, char** argv)
   }
   }
 
-  if ( rand()%3==0 ) {
+  if ( rand()%10==0 ) {
   int noise = rand()%(rand()%(rand()%(rand()%depth)));
  for (int x=0; x<width; x++) {
   for (int y=0; y<height; y++) {
