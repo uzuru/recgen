@@ -1,8 +1,12 @@
+/*
+Beware: Ugly C code that crashes depending on input
+License: http://creativecommons.org/licenses/by/3.0/
+*/
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>       /* time */
-
+#include <time.h>   
 
 struct {
   double p;
@@ -137,7 +141,7 @@ void gradMap(double d, unsigned char* imageData, int pos) {
       int gre = (double) gradients[g-1]->g * (1.0-d) + (double) gradients[g]->g * d;
       int blu = (double) gradients[g-1]->b * (1.0-d) + (double) gradients[g]->b * d;
 
-       printf("d= %lf\n", gradients[g-1]->r * (1.0-d) + (double) gradients[g]->r * d);
+      //printf("d= %lf\n", gradients[g-1]->r * (1.0-d) + (double) gradients[g]->r * d);
 
       imageData[pos+0] = red;
       imageData[pos+1] = gre;

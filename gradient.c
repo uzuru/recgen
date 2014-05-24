@@ -1,8 +1,12 @@
+/*
+Beware: Ugly C code that crashes depending on input
+License: http://creativecommons.org/licenses/by/3.0/
+*/
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>       /* time */
-
+#include <time.h>   
 
 struct {
   double p;
