@@ -1,7 +1,7 @@
 #!/bin/bash
 rm recgen
 gcc -std=c99 -Wall recgen.c -o recgen -lm 
-rm test*
+rm output/test*
 for x in {1000..5000} ; do ./recgen test$x.ppm $x; 
 
 if [ -f test$x.ppm ]; then
