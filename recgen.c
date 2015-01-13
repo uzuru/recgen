@@ -6,8 +6,8 @@ License: http://creativecommons.org/licenses/by/3.0/
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>       /* time */
-
+#include <time.h>       
+#include <string.h>
 #include "gradient.c"
 
 const int width = 2000;
@@ -203,11 +203,34 @@ int repeat=(rand()%(rand()%20));
   } 
 }
 
+if (rand()%4==0) {
+int* temp = malloc(width*height*sizeof(int));
+int blur=rand()%(rand()%(rand()%width/10)); 
+ for (int x=0; x<width-blur; x++) {
+   //printf("blurring %i\n", x);
+  for (int y=0; y<height-blur; y++) {
+     int blurval=0;
+     double blurcount=0;
+     for (int x2=0; x2<blur; x2++) {
+      for (int y2=0; y2<blur; y2++) {
+        double f = 1.0/(1+sqrt((x2-blur/2)*(x2-blur/2)+(y2-blur/2)*(y2-blur/2)));
+        blurval+=data[dpos(x+x2,y+y2)]*f;
+        blurcount+=f;
+      }
+    }
+    blurval = blurval / blurcount;
+    temp[dpos(x+blur/2,y+blur/2)] = blurval;
+  } 
+}
+memcpy(data,temp,width*height*sizeof(int));
+free(temp);
+}
+
   createGrads();
   unsigned char* imageData = malloc(width*height*3);
 
  for (int x=0; x<width; x++) {
-  for (int y=0; y<width; y++) {
+  for (int y=0; y<width; y++) { 
       gradMap( (double) (data[dpos(x,y)] % depth )/depth, imageData, pos(x,y));
     }
   }
