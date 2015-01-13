@@ -10,8 +10,8 @@ License: http://creativecommons.org/licenses/by/3.0/
 
 #include "gradient.c"
 
-const int width = 1004;
-const int height = 638;
+const int width = 2000;
+const int height = 1300;
 const int depthstartmax = 50000;
 const int depthstartmin = 1000;
 
@@ -179,15 +179,28 @@ int main(int argc, char** argv)
     }
   }
   }
-
+  
   if ( rand()%10==0 ) {
   int noise = rand()%(rand()%(rand()%(rand()%depth)));
- for (int x=0; x<width; x++) {
+  for (int x=0; x<width; x++) {
   for (int y=0; y<height; y++) {
 
     data[dpos(x,y)] += rand()%noise;
   }
   }
+}
+
+float sinstrength=(float)(rand()%(rand()%10000))/10000;
+int sinflags = rand()%8;
+int repeat=(rand()%(rand()%20));
+  if ( rand()%3==0 ) {
+ for (int x=0; x<width; x++) {
+  for (int y=0; y<height; y++) {
+    data[dpos(x,y)] += (int)(sin((float)x/width*repeat)*depth * (sinflags&0b001?1:0) * sinstrength);
+    data[dpos(x,y)] += (int)(sin((float)y/height*repeat)*depth * (sinflags&0b010?1:0) * sinstrength);
+    data[dpos(x,y)] += (int)(tan((float)y/height*repeat)*depth * (sinflags&0b100?1:0) * sinstrength);
+    }
+  } 
 }
 
   createGrads();
@@ -198,7 +211,6 @@ int main(int argc, char** argv)
       gradMap( (double) (data[dpos(x,y)] % depth )/depth, imageData, pos(x,y));
     }
   }
-
 
   FILE * fp;  
   fp = fopen(argv[1], "wb");   //mode = write binary    
