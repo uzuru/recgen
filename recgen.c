@@ -202,7 +202,7 @@ int repeat=(rand()%(rand()%20));
     }
   } 
 }
-
+/*
 if (rand()%4==0) {
 int* temp = malloc(width*height*sizeof(int));
 int blur=rand()%(rand()%(rand()%width/10)); 
@@ -224,7 +224,7 @@ int blur=rand()%(rand()%(rand()%width/10));
 }
 memcpy(data,temp,width*height*sizeof(int));
 free(temp);
-}
+}*/
 
   createGrads();
   unsigned char* imageData = malloc(width*height*3);
